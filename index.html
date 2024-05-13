@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Data Table -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <!-- Firebase JS -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+
+    <!-- Bootstrap e Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>F&C Doações | Dashboard</title>
+</head>
+
+<body>
+    <nav class="navbar text-white">
+        <div class="container-fluid">
+            <a class="navbar-brand h1" href="#">
+                <span class="text-danger">
+                    <img src="logo_cb.png" width="30px" class="logoF&C.png"></i>
+                </span>
+                F&C | Doações
+            </a>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+
+        <div class="p-3 mx-auto">
+            <div class="row d-flex justify-content-between g-3">
+                <div
+                    class="d-flex align-items-center col-12 col-md-2 display-6 border border-success text-success p-3 rounded text-center">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3" id="valorTotalCompra">
+                        R$ 0,00
+                    </div>
+                </div>
+                <div
+                    class="d-flex align-items-center col-12 col-md-2 display-6 border border-warning text-warning p-3 rounded text-center">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-cart4"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3" id="itensPlanejados">
+                        0
+                    </div>
+                </div>
+                <div
+                    class="d-flex align-items-center col-12 col-md-2 display-6 border border-danger text-danger p-3 rounded text-center">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-cart4"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        0
+                    </div>
+                </div>
+                <div
+                    class="d-flex align-items-center col-12 col-md-2 display-6 border border-primary text-primary p-3 rounded text-center text-primary">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-cart-check-fill"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3" id="itensComprados">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <div class="d-flex justify-content-between mx-auto p-3 col-12">
+            <div class="display-5 text-center">Produtos</div>
+            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modalProdutos">
+                <i class="bi bi-plus-circle-dotted"></i>
+            </button>
+        </div>
+
+        <div class="card col-md-8 col-12 mx-auto p-3" style="width:100%; max-width: 100%; overflow: auto;">
+            <table id="myTable" class="table table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Produtos</th>
+                        <th>Mercado</th>
+                        <th>Marca</th>
+                        <th>Quantidade</th>
+                        <th>Valor unitário</th>
+                        <th>Valor total</th>
+                        <th>Tido</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalProdutos" tabindex="-1" aria-labelledby="modalProdutosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalProdutosLabel">Detalhes do produto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="form-floating col-12 col-md-4 mb-3">
+                            <input type="text" class="form-control" id="Produto" placeholder="Produto">
+                            <label for="Produto">Produto</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-4">
+                            <input type="text" class="form-control" id="Marca" placeholder="Marca">
+                            <label for="Marca">Marca</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-4">
+                            <input type="text" class="form-control" id="Mercado" placeholder="Mercado">
+                            <label for="Mercado">Mercado</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-3">
+                            <input type="number" class="form-control" id="Quantidade" placeholder="Quantidade">
+                            <label for="Quantidade">Quantidade</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-3">
+                            <input type="text" onchange="multi()" onchange="formatarParaMoeda(this)"
+                                class="form-control" id="ValorUnitario" placeholder="Valor unitário">
+                            <label for="ValorUnitario">Valor unitário</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-3">
+                            <input type="text" class="form-control" id="ValorTotal" placeholder="Valor total" disabled>
+                            <label for="ValorTotal">Valor total</label>
+                        </div>
+                        <div class="form-floating  col-12 col-md-3">
+                            <select class="form-select" id="ProdutoObtido">
+                                <option selected>Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                            <label for="ProdutoObtido">Obtido?</label>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Insira a descrição aqui"
+                                id="descricaoProduto"></textarea>
+                            <label for="descricaoProduto">Descrição</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deletar</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Salvar alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">© 2024 F&C | Doações</p>
+    </footer>
+
+</body>
+
+<script src="assets/js/firebase.js"></script>
+<script src="script.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
+
+</html>
