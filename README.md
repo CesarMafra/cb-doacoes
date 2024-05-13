@@ -1,7 +1,5 @@
 # 🤲 CB Doações
 
- Um sistema simples para gerenciar as compras feitas para intenção de doação
-
 ![GitHub repo size](https://img.shields.io/github/repo-size/CesarMafra/cb-doacoes?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/CesarMafra/cb-doacoes?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/CesarMafra/cb-doacoes?style=for-the-badge)
@@ -12,6 +10,6 @@
 
 ## </> Tecnologias Utilizadas
 
-HTML
-CSS (Bootstrap)
+HTML | 
+CSS (Bootstrap) |
 Firebase (Back-end)
